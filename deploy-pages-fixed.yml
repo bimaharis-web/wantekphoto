@@ -40,8 +40,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Prepare GitHub Pages asset paths
-        run: |
-          sed -i 's|image: "/portfolio/|image: "portfolio/|g' src/App.tsx
+        run: sed -i 's#"/portfolio/#"portfolio/#g' src/App.tsx
 
       - name: Build website
         run: pnpm build --base=/wantekphoto/
