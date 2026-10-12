@@ -2,6 +2,12 @@
 
 Website portofolio fotografer untuk Wantek Photo, dibangun menggunakan React, Vite, TypeScript, dan Tailwind CSS.
 
+## Website
+
+Website akan tersedia setelah GitHub Pages diaktifkan:
+
+https://bimaharis-web.github.io/wantekphoto/
+
 ## Fitur
 
 - Galeri kategori Beauty, Portrait, dan Product

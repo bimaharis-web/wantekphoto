@@ -1,0 +1,12 @@
+{
+  "title": "Wantek Photo",
+  "description": "Portfolio fotografi profesional Wantek Photo untuk beauty, portrait, dan product photography.",
+  "language": "id",
+  "robots": {
+    "index": true
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
