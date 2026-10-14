@@ -616,9 +616,7 @@ export default function App() {
 
             <div className="about-layout">
               <div className="about-portrait-column">
-                <div
-                  className="about-portrait"
-                >
+                <div className="about-portrait">
                   <img
                     src={asset("wantek-siswanto.png")}
                     alt="Wantek Siswanto berdiri di koridor dengan komposisi simetris"
@@ -643,6 +641,10 @@ export default function App() {
                     <p>Fotografi · ISI Yogyakarta</p>
                   </div>
                   <div>
+                    <span>03</span>
+                    <p>Magister Ilmu Komunikasi · UMB</p>
+                  </div>
+                  <div>
                     <span>10+</span>
                     <p>Tahun di industri kreatif</p>
                   </div>
@@ -660,11 +662,11 @@ export default function App() {
                   Perjalanan saya di dunia visual bermula dari bangku kuliah
                   Seni Rupa di Universitas Negeri Jakarta dan diperdalam
                   melalui studi Fotografi di Institut Seni Indonesia (ISI)
-                  Yogyakarta. Di tengah perjalanan profesionalnya, ia juga 
-                  sedang menempuh pendidikan Magister Ilmu Komunikasi di 
-                  Universitas Mercu Buana sebagai upaya mempertemukan 
-                  pengalaman praktisnya dengan perspektif akademis 
-                  di bidang komunikasi.
+                  Yogyakarta. Di tengah perjalanan profesional, saya juga
+                  sedang menempuh pendidikan Magister Ilmu Komunikasi di
+                  Universitas Mercu Buana sebagai upaya mempertemukan
+                  pengalaman praktis dengan perspektif akademis di bidang
+                  komunikasi.
                 </p>
                 <p>
                   Dengan rekam jejak lebih dari satu dekade berkecimpung di
