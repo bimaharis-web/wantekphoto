@@ -660,7 +660,11 @@ export default function App() {
                   Perjalanan saya di dunia visual bermula dari bangku kuliah
                   Seni Rupa di Universitas Negeri Jakarta dan diperdalam
                   melalui studi Fotografi di Institut Seni Indonesia (ISI)
-                  Yogyakarta.
+                  Yogyakarta. Di tengah perjalanan profesionalnya, ia juga 
+                  sedang menempuh pendidikan Magister Ilmu Komunikasi di 
+                  Universitas Mercu Buana sebagai upaya mempertemukan 
+                  pengalaman praktisnya dengan perspektif akademis 
+                  di bidang komunikasi.
                 </p>
                 <p>
                   Dengan rekam jejak lebih dari satu dekade berkecimpung di
