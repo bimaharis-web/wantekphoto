@@ -123,7 +123,11 @@ const works: Work[] = [
   },
 ];
 
-const categories: Category[] = ["All", "Beauty", "Portrait", "Product"];
+const categories: Exclude<Category, "All">[] = [
+  "Beauty",
+  "Portrait",
+  "Product",
+];
 
 const blogPosts = [
   {
@@ -186,26 +190,26 @@ function ArrowUpRight({ className = "" }: { className?: string }) {
 }
 
 export default function App() {
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
-  const [selectedWork, setSelectedWork] = useState<Work | null>(null);
+  const [activeCategory, setActiveCategory] = useState<
+    Exclude<Category, "All"> | null
+  >(null);
+  const [activeWorkIndex, setActiveWorkIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const visibleWorks =
-    activeCategory === "All"
-      ? works
-      : works.filter((work) => work.category === activeCategory);
+  const visibleWorks = activeCategory
+    ? works.filter((work) => work.category === activeCategory)
+    : [];
 
   useEffect(() => {
-    document.body.style.overflow = selectedWork || menuOpen ? "hidden" : "";
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [selectedWork, menuOpen]);
+  }, [menuOpen]);
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setSelectedWork(null);
         setMenuOpen(false);
       }
     };
@@ -323,66 +327,164 @@ export default function App() {
           </div>
         </section>
 
-        <section id="work" className="bg-[#181816] py-24 text-[#f4f3ef] sm:py-32">
+        <section id="work" className="bg-[#111110] py-24 text-[#f4f3ef] sm:py-32">
           <div className="mx-auto max-w-[1480px] px-5 sm:px-8 lg:px-12">
-            <div className="mb-14 flex flex-col justify-between gap-10 border-b border-white/15 pb-8 md:flex-row md:items-end">
+            <div className="mb-12 flex flex-col justify-between gap-10 border-b border-white/15 pb-8 sm:flex-row sm:items-end">
               <div>
                 <p className="mb-4 text-[10px] font-semibold tracking-[0.22em] text-white/45 uppercase">
-                  Selected portfolio
+                  {activeCategory
+                    ? `Wantek Photo · ${activeCategory} album`
+                    : "Wantek Photo · Portfolio"}
                 </p>
                 <h2 className="font-display text-5xl leading-none tracking-[-0.04em] sm:text-7xl">
-                  Recent work
+                  {activeCategory ? (
+                    <>
+                      {activeCategory}
+                      <span className="text-[#a65a3a]">.</span>
+                    </>
+                  ) : (
+                    <>
+                      The collection<span className="text-[#a65a3a]">.</span>
+                    </>
+                  )}
                 </h2>
               </div>
-              <div className="flex flex-wrap gap-x-7 gap-y-3">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => setActiveCategory(category)}
-                    className={`filter-button ${
-                      activeCategory === category ? "is-active" : ""
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
+              {activeCategory && (
+                <button
+                  type="button"
+                  onClick={() => setActiveCategory(null)}
+                  className="album-back"
+                >
+                  <span aria-hidden="true">←</span>
+                  Semua kategori
+                </button>
+              )}
             </div>
 
-            <div className="portfolio-grid">
-              {visibleWorks.map((work, index) => (
-                <button
-                  key={work.title}
-                  onClick={() => setSelectedWork(work)}
-                  className="portfolio-item group text-left"
-                  aria-label={`View ${work.title}`}
-                >
-                  <div className="relative h-full min-h-[360px] overflow-hidden bg-white/5">
-                    <img
-                      src={work.image}
-                      alt={work.alt}
-                      style={{ objectPosition: work.position }}
-                      className="h-full w-full object-contain opacity-90 transition duration-700 ease-out group-hover:scale-[1.012] group-hover:opacity-100"
-                      loading={index > 2 ? "lazy" : "eager"}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent opacity-70 transition-opacity group-hover:opacity-90" />
-                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 sm:p-6">
-                      <div>
-                        <p className="mb-1.5 text-[9px] font-semibold tracking-[0.2em] text-white/60 uppercase">
-                          {work.category}
-                        </p>
-                        <h3 className="font-display text-3xl tracking-[-0.02em]">
-                          {work.title}
-                        </h3>
-                      </div>
-                      <span className="grid h-9 w-9 translate-y-2 place-items-center rounded-full border border-white/40 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100">
-                        <ArrowUpRight className="h-4 w-4" />
-                      </span>
-                    </div>
+            {activeCategory ? (
+              <>
+                <div className="album-carousel">
+              <button
+                type="button"
+                className="album-arrow"
+                onClick={() =>
+                  setActiveWorkIndex(
+                    (activeWorkIndex - 1 + visibleWorks.length) %
+                      visibleWorks.length,
+                  )
+                }
+                aria-label="Foto sebelumnya"
+              >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="m15 18-6-6 6-6" />
+                </svg>
+              </button>
+
+              <figure className="album-frame" aria-live="polite">
+                <div className="album-image-wrap">
+                  <img
+                    key={visibleWorks[activeWorkIndex].title}
+                    src={visibleWorks[activeWorkIndex].image}
+                    alt={visibleWorks[activeWorkIndex].alt}
+                    style={{
+                      objectPosition: visibleWorks[activeWorkIndex].position,
+                    }}
+                    className="album-image"
+                    fetchPriority="high"
+                  />
+                  <span className="album-counter">
+                    {String(activeWorkIndex + 1).padStart(2, "0")}
+                    <span className="mx-2 text-white/30">/</span>
+                    {String(visibleWorks.length).padStart(2, "0")}
+                  </span>
+                </div>
+                <figcaption className="album-caption">
+                  <div>
+                    <p className="mb-2 text-[9px] font-semibold tracking-[0.22em] text-[#c28a6f] uppercase">
+                      {visibleWorks[activeWorkIndex].category}
+                    </p>
+                    <h3 className="font-display text-3xl leading-none tracking-[-0.02em] sm:text-4xl">
+                      {visibleWorks[activeWorkIndex].title}
+                    </h3>
+                    <p className="mt-3 max-w-2xl text-xs leading-6 text-white/50 sm:text-sm">
+                      {visibleWorks[activeWorkIndex].alt}
+                    </p>
                   </div>
-                </button>
-              ))}
-            </div>
+                  <span className="hidden text-[9px] font-semibold tracking-[0.2em] text-white/35 uppercase sm:block">
+                    Wantek Photo
+                  </span>
+                </figcaption>
+              </figure>
+
+              <button
+                type="button"
+                className="album-arrow"
+                onClick={() =>
+                  setActiveWorkIndex((activeWorkIndex + 1) % visibleWorks.length)
+                }
+                aria-label="Foto berikutnya"
+              >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </button>
+                </div>
+
+                <div className="album-dots" aria-label="Pilih foto">
+                  {visibleWorks.map((work, index) => (
+                    <button
+                      key={work.title}
+                      type="button"
+                      className={`album-dot ${index === activeWorkIndex ? "is-active" : ""}`}
+                      onClick={() => setActiveWorkIndex(index)}
+                      aria-label={`Tampilkan foto ${index + 1}: ${work.title}`}
+                      aria-current={
+                        index === activeWorkIndex ? "true" : undefined
+                      }
+                    />
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="category-grid">
+                {categories.map((category) => {
+                    const categoryWorks = works.filter(
+                      (work) => work.category === category,
+                    );
+                    const cover = categoryWorks[0];
+
+                    return (
+                      <button
+                        key={category}
+                        type="button"
+                        className="category-card"
+                        onClick={() => {
+                          setActiveCategory(category);
+                          setActiveWorkIndex(0);
+                        }}
+                        aria-label={`Buka album ${category}, ${categoryWorks.length} foto`}
+                      >
+                        <span className="category-card-image">
+                          <img src={cover.image} alt="" loading="lazy" />
+                          <span className="category-card-overlay" />
+                          <span className="category-card-count">
+                            {String(categoryWorks.length).padStart(2, "0")}{" "}
+                            photographs
+                          </span>
+                          <span className="category-card-title">
+                            <span className="font-display text-4xl sm:text-5xl">
+                              {category}
+                            </span>
+                            <span className="category-card-open">
+                              <ArrowUpRight className="h-4 w-4" />
+                            </span>
+                          </span>
+                        </span>
+                      </button>
+                    );
+                })}
+              </div>
+            )}
           </div>
         </section>
 
@@ -527,39 +629,6 @@ export default function App() {
         </div>
       )}
 
-      {selectedWork && (
-        <div
-          className="fixed inset-0 z-50 grid place-items-center bg-black/90 p-4 backdrop-blur-sm sm:p-10"
-          onClick={() => setSelectedWork(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-label={selectedWork.title}
-        >
-          <button
-            onClick={() => setSelectedWork(null)}
-            className="absolute top-5 right-5 grid h-11 w-11 place-items-center rounded-full border border-white/30 text-2xl font-light text-white transition hover:bg-white hover:text-black"
-            aria-label="Close image"
-          >
-            ×
-          </button>
-          <div
-            className="flex max-h-full max-w-5xl flex-col items-center"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <img
-              src={selectedWork.image}
-              alt={selectedWork.alt}
-              className="max-h-[78vh] max-w-full object-contain"
-            />
-            <div className="mt-5 flex w-full items-center justify-between text-white">
-              <h3 className="font-display text-3xl">{selectedWork.title}</h3>
-              <p className="text-[9px] font-semibold tracking-[0.2em] text-white/55 uppercase">
-                {selectedWork.category}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
