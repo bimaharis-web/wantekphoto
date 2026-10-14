@@ -129,7 +129,24 @@ const categories: Exclude<Category, "All">[] = [
   "Product",
 ];
 
-const blogPosts = [
+type BlogBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; text: string }
+  | { type: "list"; items: string[] };
+
+type BlogPost = {
+  title: string;
+  category: string;
+  readTime: string;
+  published?: string;
+  author?: string;
+  image: string;
+  alt: string;
+  excerpt: string;
+  body: Array<string | BlogBlock>;
+};
+
+const blogPosts: BlogPost[] = [
   {
     title: "Membentuk cahaya untuk portrait yang terasa hidup",
     category: "Portrait",
@@ -171,6 +188,106 @@ const blogPosts = [
       "Pilih properti yang memperkuat cerita tanpa mengalihkan perhatian. Sisakan ruang yang cukup di sekitar produk, lalu gunakan cahaya untuk memisahkan bentuk dan material dari latar.",
       "Ambil beberapa variasi: tampilan keseluruhan, detail material, dan momen penggunaan. Rangkaian gambar ini membuat cerita produk lebih lengkap untuk katalog maupun kampanye.",
     ],
+  },
+  {
+    title: "Menjaga Jiwa di Balik Lensa: Fotografi di Era Kecerdasan Buatan (AI)",
+    category: "Photography Insights / Tren",
+    readTime: "6 menit membaca",
+    published: "Oktober 2026",
+    author: "Wantekphoto",
+    image: asset("portfolio/wantek-portrait-03.jpg"),
+    alt: "Portrait profesional dari portofolio Wantek Photo, merepresentasikan sentuhan manusia dalam fotografi",
+    excerpt:
+      "Di tengah gambar yang bisa dihasilkan secara instan oleh AI, momen autentik, empati, dan cerita manusia tetap menjadi jiwa fotografi.",
+    body: [
+      {
+        type: "paragraph",
+        text: 'Dalam beberapa tahun terakhir, lanskap industri kreatif—khususnya dunia fotografi—mengalami pergeseran yang sangat masif. Kehadiran teknologi Artificial Intelligence (AI) atau Kecerdasan Buatan membuat siapa saja bisa "menciptakan" gambar yang luar biasa hanya dengan mengetikkan beberapa kalimat perintah (prompt).',
+      },
+      {
+        type: "paragraph",
+        text: "Bagi sebagian fotografer tradisional, fenomena ini memunculkan kecemasan: Apakah profesi fotografer akan segera tergantikan oleh mesin?",
+      },
+      {
+        type: "paragraph",
+        text: "Sebagai seorang fotografer yang, di sisi lain, juga hidup berdampingan dengan perkembangan teknologi digital, saya melihat AI bukan sebagai ancaman yang mematikan, melainkan sebagai cermin yang memaksa kita untuk mendefinisikan ulang apa arti sejati dari sebuah fotografi.",
+      },
+      {
+        type: "heading",
+        text: '1. Ketika Gambar Menjadi "Instan", Apa Nilai Sebuah Karya?',
+      },
+      {
+        type: "paragraph",
+        text: "Hari ini, AI mampu menghasilkan foto pemandangan yang megah, model fesyen dengan pencahayaan sempurna, hingga produk komersial tanpa perlu menyewa studio mahal. Gambar-gambar yang dihasilkan sangat mulus secara visual.",
+      },
+      {
+        type: "paragraph",
+        text: "Namun, ada satu hal fundamental yang tidak pernah bisa ditiru oleh AI: kejadian nyata, waktu yang tidak bisa diputar ulang, dan jiwa manusia.",
+      },
+      {
+        type: "paragraph",
+        text: "Sebuah foto portofolio profesional bukan sekadar kumpulan piksel yang indah dipandang. Ia adalah rekaman dari sebuah detik yang autentik:",
+      },
+      {
+        type: "list",
+        items: [
+          "Getar gugup seorang klien saat pertama kali berdiri di depan kamera.",
+          "Ekspresi tawa lepas yang natural karena suasana hangat saat sesi pemotretan.",
+          "Keringat dan kerja keras di balik layar (behind the scene) saat mengejar momen golden hour di lapangan.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: 'Elemen-elemen emosional dan dokumenter inilah yang memberikan "nyawa" pada karya fotografi yang tidak akan pernah bisa direplikasi oleh generator AI.',
+      },
+      {
+        type: "heading",
+        text: "2. AI sebagai Alat Bantu (Tools), Bukan Pengganti Visi Kreatif",
+      },
+      {
+        type: "paragraph",
+        text: "Alih-alih menolak kehadiran teknologi, fotografer modern dapat memanfaatkan AI sebagai alat bantu yang mempercepat proses kerja (workflow), bukan menghapuskan proses kreatifnya:",
+      },
+      {
+        type: "list",
+        items: [
+          "Penyuntingan cepat (editing efficiency): fitur berbasis AI di aplikasi seperti Adobe Lightroom membantu mempercepat seleksi foto, pembersihan latar belakang yang rumit, hingga noise reduction. Waktu yang biasanya dihabiskan berjam-jam di depan komputer kini bisa dialihkan untuk berinteraksi lebih dekat dengan klien.",
+          "Eksplorasi konsep: AI bisa digunakan sebagai papan mood (moodboard) digital untuk mencari inspirasi gaya warna atau tata letak sebelum benar-benar turun ke lapangan melakukan sesi pemotretan.",
+        ],
+      },
+      {
+        type: "heading",
+        text: "3. Mengapa Fotografer Profesional Justru Semakin Dicari?",
+      },
+      {
+        type: "paragraph",
+        text: 'Justru di era di mana internet dibanjiri oleh jutaan gambar buatan AI yang terlihat seragam dan "terlalu sempurna", keaslian menjadi barang mewah yang paling dicari.',
+      },
+      {
+        type: "paragraph",
+        text: "Klien korporat, pasangan yang ingin mengabadikan momen pernikahan, atau individu yang memesan sesi potret profil profesional kini semakin menghargai human touch. Mereka ingin cerita nyata, bukan ilusi digital. Mereka ingin berkolaborasi dengan manusia yang bisa mendengarkan cerita mereka, memahami visi mereka, dan mengeksekusinya dengan empati.",
+      },
+      {
+        type: "heading",
+        text: "Kesimpulan: Kamera Menangkap Cahaya, Fotografer Menangkap Cerita",
+      },
+      {
+        type: "paragraph",
+        text: "AI dapat menciptakan gambar, tetapi AI tidak memiliki pengalaman hidup. Ia tidak tahu bagaimana rasanya berdiri di bawah terik matahari demi mendapatkan sudut pandang terbaik, atau bagaimana membangun chemistry agar orang yang awalnya kaku di depan kamera bisa tersenyum lepas.",
+      },
+      {
+        type: "paragraph",
+        text: "Di era kecerdasan buatan ini, masa depan fotografi tetap berada di tangan mereka yang berani memegang kamera dengan integritas, empati, dan sudut pandang yang unik.",
+      },
+      {
+        type: "paragraph",
+        text: "Karena pada akhirnya, fotografi bukan tentang seberapa canggih alat yang digunakan, melainkan tentang cerita apa yang ingin Anda sampaikan kepada dunia.",
+      },
+      {
+        type: "paragraph",
+        text: "Ingin berdiskusi atau mengabadikan momen autentik Anda melalui lensa? Mari terhubung dan wujudkan cerita visual Anda bersama Wantekphoto.",
+      },
+    ] satisfies Array<string | BlogBlock>,
   },
 ];
 
@@ -488,61 +605,108 @@ export default function App() {
           </div>
         </section>
 
-        <section id="about" className="py-24 sm:py-32 lg:py-40">
-          <div className="mx-auto grid max-w-[1480px] gap-16 px-5 sm:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24 lg:px-12">
-            <div>
-              <p className="section-label">About the studio</p>
-              <div className="mt-10 aspect-[4/5] max-w-md overflow-hidden bg-[#ddd8cf]">
-                <img
-                  src={works[1].image}
-                  alt="Koleksi karya Wantek Photo"
-                  className="h-full w-full object-cover object-center grayscale-[15%]"
-                  loading="lazy"
-                />
-              </div>
+        <section id="about" className="about-section">
+          <div className="mx-auto max-w-[1480px] px-5 py-24 sm:px-8 sm:py-32 lg:px-12 lg:py-40">
+            <div className="about-heading">
+              <p className="about-eyebrow">The person behind the photographs</p>
+              <h2 className="font-display">
+                Behind the Lens <span>&amp; Story.</span>
+              </h2>
             </div>
-            <div className="flex flex-col justify-between">
-              <div>
-                <p className="font-display text-4xl leading-[1.05] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
-                  Menciptakan gambar yang terasa{" "}
-                  <span className="italic text-[#a65a3a]">personal</span>, bukan
-                  sekadar sempurna.
-                </p>
-                <div className="mt-12 grid gap-8 border-t border-black/15 pt-8 sm:grid-cols-2">
-                  <p className="text-sm leading-7 text-black/60">
-                    Wantek Photo berfokus pada portrait, beauty, dan product
-                    photography. Setiap sesi dibangun dari cahaya, karakter,
-                    dan detail untuk menghasilkan visual yang bersih dan
-                    berkesan.
-                  </p>
-                  <p className="text-sm leading-7 text-black/60">
-                    Tersedia untuk proyek personal, editorial, campaign, dan
-                    kebutuhan visual brand. Mari ceritakan ide Anda dan
-                    menciptakan sesuatu bersama.
-                  </p>
+
+            <div className="about-layout">
+              <div className="about-portrait-column">
+                <div
+                  className="about-portrait"
+                >
+                  <img
+                    src={asset("wantek-siswanto.png")}
+                    alt="Wantek Siswanto berdiri di koridor dengan komposisi simetris"
+                    className="about-portrait-image"
+                    loading="lazy"
+                  />
+                  <span className="about-portrait-shade" />
+                  <span className="about-portrait-corner about-portrait-corner-top" />
+                  <span className="about-portrait-label">
+                    Wantek Siswanto / Photographer
+                  </span>
+                  <span className="about-portrait-index">01 — 01</span>
+                  <span className="about-portrait-corner about-portrait-corner-bottom" />
+                </div>
+                <div className="about-credentials">
+                  <div>
+                    <span>01</span>
+                    <p>Seni Rupa · UNJ</p>
+                  </div>
+                  <div>
+                    <span>02</span>
+                    <p>Fotografi · ISI Yogyakarta</p>
+                  </div>
+                  <div>
+                    <span>10+</span>
+                    <p>Tahun di industri kreatif</p>
+                  </div>
                 </div>
               </div>
-              <a
-                href="https://www.instagram.com/wantekphoto/"
-                target="_blank"
-                rel="noreferrer"
-                className="group mt-12 flex w-fit items-center gap-4 border-b border-black pb-2 text-[11px] font-semibold tracking-[0.16em] uppercase"
-              >
-                Follow @wantekphoto
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-              </a>
+
+              <div className="about-copy">
+                <p className="about-intro">
+                  Halo, saya <span>Wantek Siswanto.</span> Bagi saya, fotografi
+                  bukan sekadar menangkap pantulan cahaya, melainkan cara
+                  merekam jiwa, menyusun emosi, dan menceritakan narasi yang
+                  jujur dari setiap subjek di depan lensa.
+                </p>
+                <p>
+                  Perjalanan saya di dunia visual bermula dari bangku kuliah
+                  Seni Rupa di Universitas Negeri Jakarta dan diperdalam
+                  melalui studi Fotografi di Institut Seni Indonesia (ISI)
+                  Yogyakarta.
+                </p>
+                <p>
+                  Dengan rekam jejak lebih dari satu dekade berkecimpung di
+                  industri media kreatif nasional—mulai dari berkontribusi
+                  sebagai fotografer dan penulis untuk Tabloid NOVA, hingga
+                  memotret untuk berbagai majalah gaya hidup dan komersial
+                  terkemuka di bawah naungan Kompas Gramedia, MRA Media Group,
+                  dan Kawan Lama Group—saya terbiasa menghadirkan standar visual
+                  yang tajam, penuh detail, dan memiliki karakter timeless.
+                </p>
+                <p>
+                  Melalui Wantekphoto, setiap bingkai dikurasi dengan pendekatan
+                  yang tenang, natural, dan mengutamakan estetika visual yang
+                  bersih. Baik itu dalam proyek potret personal, komersial
+                  produk, maupun dokumentasi cerita kehidupan, fokus saya
+                  adalah menjaga keaslian momen agar tetap hidup dan bermakna
+                  ketika dilihat kembali bertahun-tahun ke depan.
+                </p>
+
+                <div className="about-signoff">
+                  <p className="font-display">
+                    Let’s capture stories that matter.
+                  </p>
+                  <a
+                    href="https://www.instagram.com/wantekphoto/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="about-instagram"
+                  >
+                    Mari terhubung di Instagram @wantekphoto
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         <section id="contact" className="px-5 pb-5 sm:px-8 sm:pb-8">
           <div className="mx-auto max-w-[1480px] bg-[#a65a3a] px-6 py-20 text-[#f8f3eb] sm:px-12 sm:py-28 lg:px-20">
-            <div className="flex flex-col items-start justify-between gap-12 lg:flex-row lg:items-end">
-              <div>
+            <div className="grid items-start gap-12 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
+              <div className="flex flex-col items-start">
                 <p className="mb-7 text-[10px] font-semibold tracking-[0.22em] text-white/65 uppercase">
                   Have a project in mind?
                 </p>
-                <h2 className="font-display max-w-3xl text-6xl leading-[0.9] tracking-[-0.05em] sm:text-8xl lg:text-9xl">
+                <h2 className="font-display max-w-3xl text-6xl leading-[0.9] tracking-[-0.05em] sm:text-8xl lg:text-7xl xl:text-8xl">
                   Let's create.
                 </h2>
                 <a
@@ -553,18 +717,44 @@ export default function App() {
                 >
                   WhatsApp — 0853-7008-0083
                 </a>
+                <a
+                  href="https://wa.me/6285370080083"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group mt-8 flex items-center gap-5 text-[11px] font-semibold tracking-[0.16em] uppercase"
+                >
+                  Chat on WhatsApp
+                  <span className="grid h-14 w-14 place-items-center rounded-full border border-white/45 transition-colors group-hover:bg-white group-hover:text-[#a65a3a]">
+                    <ArrowUpRight className="h-5 w-5" />
+                  </span>
+                </a>
               </div>
-              <a
-                href="https://wa.me/6285370080083"
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center gap-5 text-[11px] font-semibold tracking-[0.16em] uppercase"
-              >
-                Chat on WhatsApp
-                <span className="grid h-14 w-14 place-items-center rounded-full border border-white/45 transition-colors group-hover:bg-white group-hover:text-[#a65a3a]">
-                  <ArrowUpRight className="h-5 w-5" />
-                </span>
-              </a>
+              <div className="w-full max-w-lg lg:justify-self-end">
+                <div className="mb-4 flex items-center justify-between gap-4">
+                  <p className="text-[10px] font-semibold tracking-[0.22em] text-white/75 uppercase">
+                    Find us
+                  </p>
+                  <a
+                    href="https://maps.app.goo.gl/KQbMVdmj3jMhxcJ57"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-center gap-2 text-[9px] font-semibold tracking-[0.14em] text-white/80 uppercase transition-colors hover:text-white"
+                  >
+                    Buka di Google Maps
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                </div>
+                <div className="aspect-[16/9] max-h-60 overflow-hidden border border-white/35 bg-[#181816]/10">
+                  <iframe
+                    title="Lokasi Wantekphoto di Google Maps"
+                    src="https://maps.google.com/maps?q=-6.2290212%2C106.6927902&z=16&output=embed"
+                    className="h-full w-full border-0 grayscale-[0.15]"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -702,15 +892,52 @@ function BlogPage() {
             <h2 className="font-display mt-5 text-5xl leading-[0.95] tracking-[-0.04em] sm:text-7xl">
               {activePost.title}
             </h2>
+            {(activePost.published || activePost.author) && (
+              <p className="mt-5 text-[10px] font-semibold tracking-[0.14em] text-black/45 uppercase">
+                {activePost.published}
+                {activePost.published && activePost.author && (
+                  <span className="px-2">·</span>
+                )}
+                {activePost.author && <>Oleh {activePost.author}</>}
+              </p>
+            )}
             <img
               src={activePost.image}
               alt={activePost.alt}
               className="mt-10 max-h-[620px] w-full bg-[#ddd8cf] object-cover"
             />
             <div className="mt-10 space-y-6 text-sm leading-8 text-black/65">
-              {activePost.body.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
+              {activePost.body.map((block, index) => {
+                if (typeof block === "string") {
+                  return <p key={block}>{block}</p>;
+                }
+
+                if (block.type === "heading") {
+                  return (
+                    <h3
+                      key={`${block.type}-${index}`}
+                      className="font-display pt-5 text-3xl leading-tight text-[#181816] sm:text-4xl"
+                    >
+                      {block.text}
+                    </h3>
+                  );
+                }
+
+                if (block.type === "list") {
+                  return (
+                    <ul
+                      key={`${block.type}-${index}`}
+                      className="list-disc space-y-3 pl-6 marker:text-[#a65a3a]"
+                    >
+                      {block.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  );
+                }
+
+                return <p key={`${block.type}-${index}`}>{block.text}</p>;
+              })}
             </div>
           </article>
         ) : (
@@ -728,6 +955,12 @@ function BlogPage() {
                 <div className="flex flex-1 flex-col border-b border-black/15 py-6">
                   <p className="text-[9px] font-semibold tracking-[0.18em] text-[#a65a3a] uppercase">
                     {post.category} <span className="px-2 text-black/30">/</span>
+                    {post.published && (
+                      <>
+                        {post.published}{" "}
+                        <span className="px-2 text-black/30">/</span>
+                      </>
+                    )}
                     {post.readTime}
                   </p>
                   <h2 className="font-display mt-4 text-4xl leading-[0.95] tracking-[-0.03em]">

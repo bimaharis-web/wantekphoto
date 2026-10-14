@@ -31,6 +31,246 @@ button {
   color: #fff;
 }
 
+.about-section {
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 12% 72%, rgb(192 153 78 / 0.075), transparent 38%),
+    #111110;
+  color: #f4f3ef;
+}
+
+.about-heading {
+  margin-bottom: clamp(3rem, 7vw, 6.5rem);
+  border-bottom: 1px solid rgb(255 255 255 / 0.16);
+  padding-bottom: 2rem;
+}
+
+.about-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: rgb(244 243 239 / 0.5);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.about-eyebrow::before {
+  width: 2rem;
+  height: 1px;
+  content: "";
+  background: #c6a15b;
+}
+
+.about-heading h2 {
+  margin: 1.5rem 0 0;
+  font-size: clamp(3.6rem, 8.5vw, 8rem);
+  line-height: 0.88;
+  letter-spacing: -0.055em;
+}
+
+.about-heading h2 span {
+  color: #c6a15b;
+  font-style: italic;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.78fr) minmax(0, 1.22fr);
+  align-items: start;
+  gap: clamp(2.5rem, 7vw, 7rem);
+}
+
+.about-portrait-column {
+  position: sticky;
+  top: 6rem;
+  max-width: 30rem;
+}
+
+.about-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgb(198 161 91 / 0.45);
+  background:
+    radial-gradient(ellipse at 50% 30%, rgb(198 161 91 / 0.13), transparent 43%),
+    #1b1b19;
+}
+
+.about-portrait-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: grayscale(100%) contrast(1.04);
+  transition:
+    filter 500ms ease,
+    transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.about-portrait:hover .about-portrait-image {
+  filter: grayscale(72%) contrast(1.04);
+  transform: scale(1.025);
+}
+
+.about-portrait-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0.03) 40%,
+    rgb(0 0 0 / 0.12) 62%,
+    rgb(0 0 0 / 0.75) 100%
+  );
+  pointer-events: none;
+}
+
+.about-portrait-corner {
+  position: absolute;
+  z-index: 1;
+  width: 3rem;
+  height: 3rem;
+  border-color: #c6a15b;
+  border-style: solid;
+  pointer-events: none;
+}
+
+.about-portrait-corner-top {
+  top: 1rem;
+  left: 1rem;
+  border-width: 1px 0 0 1px;
+}
+
+.about-portrait-corner-bottom {
+  right: 1rem;
+  bottom: 1rem;
+  border-width: 0 1px 1px 0;
+}
+
+.about-portrait-label,
+.about-portrait-index {
+  position: absolute;
+  z-index: 1;
+  bottom: 1.5rem;
+  color: rgb(255 255 255 / 0.82);
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.about-portrait-label {
+  left: 1.5rem;
+}
+
+.about-portrait-index {
+  right: 1.5rem;
+  color: #c6a15b;
+}
+
+.about-credentials {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.about-credentials > div {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  padding: 0.7rem 0;
+}
+
+.about-credentials span {
+  min-width: 2.5rem;
+  color: #c6a15b;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.about-credentials p {
+  margin: 0;
+  color: rgb(244 243 239 / 0.72);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.about-copy {
+  max-width: 53rem;
+  padding-top: 0.5rem;
+}
+
+.about-copy > p {
+  margin: 0 0 1.5rem;
+  color: rgb(244 243 239 / 0.62);
+  font-size: 0.875rem;
+  line-height: 2;
+}
+
+.about-copy > .about-intro {
+  margin-bottom: 2rem;
+  color: #f4f3ef;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(1.75rem, 3.1vw, 2.7rem);
+  line-height: 1.22;
+}
+
+.about-intro span {
+  color: #c6a15b;
+  font-style: italic;
+}
+
+.about-signoff {
+  margin-top: 2.5rem;
+  border-top: 1px solid rgb(255 255 255 / 0.16);
+  padding-top: 1.75rem;
+}
+
+.about-signoff > p {
+  margin: 0 0 1.25rem;
+  color: #f4f3ef;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.05;
+}
+
+.about-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  border-bottom: 1px solid rgb(198 161 91 / 0.65);
+  padding-bottom: 0.5rem;
+  color: #c6a15b;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.about-instagram:hover {
+  border-color: #f4f3ef;
+  color: #f4f3ef;
+}
+
+@media (max-width: 767px) {
+  .about-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-portrait-column {
+    position: relative;
+    top: auto;
+    width: 100%;
+    max-width: 26rem;
+    margin-inline: auto;
+  }
+}
+
 .nav-link {
   position: relative;
   padding-block: 0.25rem;
