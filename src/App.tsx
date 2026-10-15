@@ -285,6 +285,8 @@ const works: Work[] = [
   },
 ];
 
+const heroSlides = [works[0], works[7], works[30], works[18]];
+
 const categories: Exclude<Category, "All">[] = [
   "Beauty",
   "Portrait",
@@ -474,10 +476,20 @@ export default function App() {
   >(null);
   const [activeWorkIndex, setActiveWorkIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [heroAutoplay, setHeroAutoplay] = useState(true);
 
   const visibleWorks = activeCategory
     ? works.filter((work) => work.category === activeCategory)
     : [];
+
+  useEffect(() => {
+    if (!heroAutoplay) return;
+    const interval = window.setInterval(() => {
+      setHeroIndex((index) => (index + 1) % heroSlides.length);
+    }, 5000);
+    return () => window.clearInterval(interval);
+  }, [heroAutoplay]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -590,14 +602,53 @@ export default function App() {
               <div className="absolute -top-5 -left-5 h-24 w-24 border-t border-l border-[#a65a3a]/70" />
               <div className="relative aspect-[4/5] overflow-hidden bg-[#ddd8cf]">
                 <img
-                  src={works[0].image}
-                  alt={works[0].alt}
-                  className="h-full w-full object-cover object-center saturate-[0.85]"
+                  key={heroIndex}
+                  src={heroSlides[heroIndex].image}
+                  alt={heroSlides[heroIndex].alt}
+                  className="hero-slide h-full w-full object-cover object-center saturate-[0.85]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 <p className="absolute bottom-5 left-5 text-[9px] font-semibold tracking-[0.2em] text-white/85 uppercase">
-                  Wantek portfolio / 01
+                  Wantek portfolio / {String(heroIndex + 1).padStart(2, "0")}
                 </p>
+                <div className="absolute right-4 bottom-4 flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHeroAutoplay(false);
+                      setHeroIndex(
+                        (heroIndex - 1 + heroSlides.length) % heroSlides.length,
+                      );
+                    }}
+                    className="grid h-8 w-8 place-items-center rounded-full border border-white/60 text-lg text-white transition-colors hover:bg-white hover:text-black"
+                    aria-label="Foto hero sebelumnya"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setHeroAutoplay(!heroAutoplay)}
+                    className="grid h-8 w-8 place-items-center rounded-full border border-white/60 text-[10px] text-white transition-colors hover:bg-white hover:text-black"
+                    aria-label={
+                      heroAutoplay
+                        ? "Jeda slideshow hero"
+                        : "Lanjutkan slideshow hero"
+                    }
+                  >
+                    {heroAutoplay ? "Ⅱ" : "▶"}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setHeroAutoplay(false);
+                      setHeroIndex((heroIndex + 1) % heroSlides.length);
+                    }}
+                    className="grid h-8 w-8 place-items-center rounded-full border border-white/60 text-lg text-white transition-colors hover:bg-white hover:text-black"
+                    aria-label="Foto hero berikutnya"
+                  >
+                    ›
+                  </button>
+                </div>
               </div>
               <p className="absolute right-0 -bottom-7 text-[9px] tracking-[0.18em] text-black/45 uppercase">
                 Wantek Photo — Est. 2024
