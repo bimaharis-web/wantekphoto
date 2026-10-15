@@ -5,8 +5,8 @@ Vite, dan Tailwind CSS.
 
 ## Fitur
 
-- Galeri dengan enam karya untuk kategori Beauty, Portrait, dan Product
-- Filter kategori serta lightbox untuk melihat foto
+- Galeri dengan 15 foto terpilih untuk setiap kategori: Beauty, Portrait, dan Product
+- Filter kategori serta carousel dengan navigasi foto
 - Halaman Blog di `/blog/` dengan artikel tentang fotografi
 - Layout responsif untuk desktop dan perangkat mobile
 - Tautan Instagram [@wantekphoto](https://www.instagram.com/wantekphoto/)
